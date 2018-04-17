@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.mapper.boardMapper">
+
+<!-- result type="com.board.domain.boardVO" //result type은 언제 사용?-->
+
+<insert id="createBoard">
+	insert into board.jcboard(title, content)
+	values(${title}, ${content});
+</insert>
+
+<select id="readBoard">
+	select bno, title, content
+	from board.jcboard
+	where bno = ${bno};
+</select>
+
+<update id="updateBoard">
+	update board.jcboard
+	set title=${title}, content = ${content}
+	where bno = ${bno};
+</update>
+
+<delete id="deleteBoard">
+	delete 
+	from board.jcboard
+	where bno = ${bno};
+</delete>
+
+</mapper>
