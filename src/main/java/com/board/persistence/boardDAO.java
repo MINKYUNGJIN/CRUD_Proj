@@ -1,5 +1,6 @@
 package com.board.persistence;
 
+
 import com.board.domain.boardVO;
 
 public interface boardDAO {

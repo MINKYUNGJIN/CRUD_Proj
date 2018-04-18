@@ -13,7 +13,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<%-- <div>
+<div>
 	<h4>호랑이 선생님 과제_CRUD만들기</h4>
 	<table>
 		<tr>
@@ -28,9 +28,25 @@
 		</tr>
 	</table>
 	
+	<input type="button" id="save" value="저장">
+	<input type="button" id="cancle" value="취소">
 </div>
- --%>
+
 
 </body>
 </html>
+<script>
+	$("#save").on("click", function(){
+		formObj.attr("action", "/readBoard");
+		formObj.attr("method", "post");
+		alert("저장!");
+		formObj.submit();
+	})
+	
+	$("#cancle").on("click", function(){
+		formObj.attr("action", "/readBoard");
+		formObj.attr("method", "post");
+		formObj.submit();
+	})
+</script>
 
