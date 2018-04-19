@@ -2,6 +2,7 @@ package com.board.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -40,36 +41,46 @@ public class HomeController {
 		return "home";
 	}
 
+	@RequestMapping(value="/viewBoard", method = RequestMethod.GET)
+	public String viewBoard(boardVO vo, Model model)throws Exception{
+		
+		List<boardVO> blist = bservice.listBoard();
+		
+		model.addAttribute("blist", blist);
+		
+		return "/viewBoard";
+	}
+	
 	@RequestMapping(value="/createBoard", method = RequestMethod.GET)
 	public String createBoardGET(boardVO vo, Model model)throws Exception{
 		
-		bservice.createBoard(vo);
-		
-		return "/writeBoard";
+		return "/createBoard";
 	}
 	
 	@RequestMapping(value="/createBoard", method = RequestMethod.POST)
-	public String createBoardPOST(boardVO vo, Model model)throws Exception{
+	public String createBoard(boardVO vo, Model model)throws Exception{
 		
 		bservice.createBoard(vo);
-		
-		return "/writeBoard";
+		return "redirect:/viewBoard";
 	}
 	
 	@RequestMapping(value="/readBoard", method = RequestMethod.GET)
-	public String writeBoardGET(boardVO vo, int bno, Model model)throws Exception{
+	public String readBoard(boardVO vo, Model model)throws Exception{
 		
-	/*	bservice.readBoard(bno);*/
+		int bno = vo.getBno(); 
+		boardVO boardVO = bservice.readBoard(bno);
 		
-		return "redirect:/readBoard";
+		model.addAttribute("boardVO", boardVO);
+		
+		return "/readBoard";
 	}
 	
-	@RequestMapping(value="/readBoard", method = RequestMethod.POST)
-	public String writeBoardPOST(boardVO vo, int bno, Model model)throws Exception{
+	@RequestMapping(value="/deleteBoard", method = RequestMethod.POST)
+	public String deleteBoard(boardVO vo, Model model)throws Exception{
 		
-/*		bservice.readBoard(bno);
-		*/
-		return "redirect:/readBoard";
+		System.out.println(vo.getBno());
+		bservice.deleteBoard(vo.getBno());
+		return "redirect:/viewBoard";
 	}
 	
 }

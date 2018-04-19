@@ -4,16 +4,25 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+<title>Home</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+var formObj = $("#listForm");
+
+function deleteBoard(bno) {
+	formObj.attr("action", "/deleteBoard");
+	formObj.attr("method", "post");
+	formObj.submit();
+	alert("삭제!");
+} 
+</script>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-
-<%-- <div>
+<a href="/viewBoard">목록</a>
+<form id="listForm">
+	<input type="hidden" name="bno" value="${boardVO.bno }"/>
+</form>
+<div>
 	<h4>호랑이 선생님 과제_CRUD만들기</h4>
 	<table>
 		<tr>
@@ -27,9 +36,9 @@
 			<td>${boardVO.content}</td>
 		</tr>
 	</table>
-	
+	<a onclick="deleteBoard(${boardVO.bno});" style="cursor:pointer;">삭제</a>
 </div>
- --%>
+
 
 </body>
 </html>

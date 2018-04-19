@@ -5,14 +5,25 @@
 <html>
 <head>
 	<title>Home</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type='text/javascript'>
+
+	var formObj = $("#listForm");
+	
+	$("#save").on("click", function(){
+		formObj.attr("action", "/createBoard");
+		formObj.attr("method", "post");
+		formObj.submit();
+		alert("저장!");
+	})
+	
+	$("#cancle").on("click", function(){
+		location.href="/viewBoard";
+	})
+</script>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-<form role="form" method="post">
+<form id="listForm" role="form" method="post">
 <div>
 	<h4>호랑이 선생님 과제_CRUD만들기</h4>
 	<table>
@@ -23,14 +34,13 @@
 			<tr>
 				<td>
 					<div id=title_div>제목</div>
-					<input id="title" type="text" value="${BoardVO.title}">
+					<input id="title" name="title" type="text" value="${BoardVO.title}">
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<div id=content_div>내용</div>
-					<input id="content" type="text" value="${BoardVO.content}" >
-					<textarea id="content" name="content" ></textarea>
+					<textarea id="content" name="content"  >${BoardVO.content}</textarea>
 				</td>
 			</tr>
 		
@@ -47,20 +57,4 @@
 </body>
 </html>
 
-<script type='text/javascript'>
 
-	
-	
-	$("#save").on("click", function(){
-		formObj.attr("action", "/readBoard");
-		formObj.attr("method", "post");
-		alert("저장!");
-		formObj.submit();
-	})
-	
-	$("#cancle").on("click", function(){
-		formObj.attr("action", "/readBoard");
-		formObj.attr("method", "post");
-		formObj.submit();
-	})
-</script>

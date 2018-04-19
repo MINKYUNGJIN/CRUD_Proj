@@ -1,5 +1,7 @@
 package com.board.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,13 +19,18 @@ public class boardDAOImpl implements boardDAO{
 	private static String namespace = "com.board.mapper.boardMapper";
 	
 	@Override
+	public List<boardVO> listBoard() throws Exception {
+		return session.selectList(namespace + ".listBoard");
+	}
+	
+	@Override
 	public void createBoard(boardVO vo)throws Exception{
 		session.insert(namespace+".createBoard", vo);
 	}
 	
 	@Override
-	public void readBoard(int bno)throws Exception{
-		session.selectOne(namespace+".readBoard", bno);
+	public boardVO readBoard(int bno)throws Exception{
+		return session.selectOne(namespace+".readBoard", bno);
 	}
 	
 	@Override
